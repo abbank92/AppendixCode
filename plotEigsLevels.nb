@@ -1,0 +1,212 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7448,        204]
+NotebookOptionsPosition[      6969,        189]
+NotebookOutlinePosition[      7304,        204]
+CellTagsIndexPosition[      7261,        201]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Function", " ", "for", " ", "plotting", " ", "pseudospectra", " ", 
+    "level", " ", "curves"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"(", "c", ")"}], " ", "Alex", " ", "Bank", " ", "2020"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Parameters", " ", "xmin"}], ",", " ", "xmax", ",", " ", "ymin", 
+    ",", " ", 
+    RowBox[{
+    "and", " ", "ymax", " ", "define", " ", "the", " ", "plot", " ", 
+     "limits"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"plotEigsLevels", "[", 
+    RowBox[{"mat_", ",", "xmin_", ",", "xmax_", ",", "ymin_", ",", "ymax_"}], 
+    "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"eigs", ",", "c", ",", "n"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"eigs", " ", "=", " ", 
+       RowBox[{"Eigenvalues", "[", 
+        RowBox[{"N", "[", "mat", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"With", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"c", "=", 
+           RowBox[{"Norm", "[", "mat", "]"}]}], ",", 
+          RowBox[{"n", "=", 
+           RowBox[{"Length", "[", "mat", "]"}]}]}], "}"}], ",", 
+        RowBox[{"ContourPlot", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "c"}], " ", 
+           RowBox[{"Log10", "[", 
+            RowBox[{"First", "[", 
+             RowBox[{"SingularValueList", "[", 
+              RowBox[{
+               RowBox[{"mat", "-", 
+                RowBox[{"SparseArray", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"Band", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"1", ",", "1"}], "}"}], "]"}], "\[Rule]", 
+                   RowBox[{"x", "+", 
+                    RowBox[{"I", " ", "y"}]}]}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{"n", ",", "n"}], "}"}]}], "]"}]}], ",", 
+               RowBox[{"-", "1"}], ",", 
+               RowBox[{"Method", "\[Rule]", "\"\<Arnoldi\>\""}], ",", 
+               RowBox[{"Tolerance", "\[Rule]", "0"}]}], "]"}], "]"}], "]"}]}],
+           ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "xmin", ",", "xmax"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"y", ",", "ymin", ",", "ymax"}], "}"}], ",", 
+          RowBox[{"AspectRatio", "\[Rule]", "Automatic"}], ",", 
+          RowBox[{"Contours", "\[Rule]", 
+           RowBox[{"Range", "[", 
+            RowBox[{"1", ",", "6", ",", 
+             RowBox[{"1", "/", "2"}]}], "]"}]}], ",", 
+          RowBox[{"ContourShading", "\[Rule]", "None"}], ",", 
+          RowBox[{"ContourStyle", "\[Rule]", "Black"}], ",", 
+          RowBox[{"Epilog", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Directive", "[", 
+              RowBox[{"Black", ",", 
+               RowBox[{"AbsolutePointSize", "[", "5", "]"}]}], "]"}], ",", 
+             RowBox[{"Point", "[", 
+              RowBox[{"ReIm", "/@", "eigs"}], "]"}]}], "}"}]}]}], "]"}]}], 
+       "]"}]}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.795447625485146*^9, 3.79544775284097*^9}, {
+  3.7954483288040533`*^9, 3.795448376121974*^9}, {3.795448904108239*^9, 
+  3.7954489391796837`*^9}, {3.7954642301522703`*^9, 
+  3.7954642764241343`*^9}},ExpressionUUID->"19e2d242-ae83-4e2f-9dc1-\
+4e1ccbcb0557"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "Example", " ", "usage", " ", "using", " ", "Grcar", " ", "matrix", " ", 
+     "with", " ", "N"}], "=", "32"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Grcar", " ", "matrix"}], ",", 
+    RowBox[{
+     RowBox[{"https", ":"}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"arxiv", ".", "org"}], "/", "abs"}], "/", "1203.2390"}]}]}], 
+   "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"grcar", "[", 
+     RowBox[{
+      RowBox[{"r", ":", 
+       RowBox[{"_Integer", "?", "Positive"}], ":", "3"}], ",", 
+      RowBox[{"n_Integer", "?", "Positive"}]}], "]"}], ":=", 
+    RowBox[{"SparseArray", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"j_", ",", "k_"}], "}"}], "/;", 
+          RowBox[{"j", "\[Equal]", 
+           RowBox[{"k", "+", "1"}]}]}], "\[RuleDelayed]", 
+         RowBox[{"-", "1"}]}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"j_", ",", "k_"}], "}"}], "/;", 
+          RowBox[{"0", "\[LessEqual]", 
+           RowBox[{"k", "-", "j"}], "\[LessEqual]", "r"}]}], "\[RuleDelayed]",
+          "1"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "n"}], "}"}]}], "]"}]}], "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"mat", "=", 
+     RowBox[{"grcar", "[", "32", "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"plotEigsLevels", "[", 
+    RowBox[{"mat", ",", 
+     RowBox[{"-", "2"}], ",", "4", ",", 
+     RowBox[{"-", "4"}], ",", "4"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.7954477962988253`*^9, 3.795447803417389*^9}, {
+  3.795448279007304*^9, 3.795448339927094*^9}, {3.795448382487928*^9, 
+  3.795448394480151*^9}, {3.795448942836186*^9, 3.7954489540202417`*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"bb8bbe1d-bd51-43fb-a9b9-7019476f0d92"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"The", " ", "4", "x4", " ", "Jordan", " ", "Block"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"mat2", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", "1", ",", "0", ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", "0", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"plotEigsLevels", "[", 
+    RowBox[{"mat2", ",", 
+     RowBox[{"-", "1"}], ",", "1", ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.795448738340473*^9, 3.795448770063176*^9}, {
+  3.795448970280405*^9, 3.795449035286476*^9}, {3.79545682087444*^9, 
+  3.795456849514781*^9}},
+ CellLabel->"In[23]:=",ExpressionUUID->"10ca8de7-9397-4134-a285-845bae7f47be"]
+},
+WindowSize->{808, 755},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"12.0 for Mac OS X x86 (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3424, 84, 262, "Input",ExpressionUUID->"19e2d242-ae83-4e2f-9dc1-4e1ccbcb0557"],
+Cell[3985, 106, 1964, 53, 199, "Input",ExpressionUUID->"bb8bbe1d-bd51-43fb-a9b9-7019476f0d92"],
+Cell[5952, 161, 1013, 26, 73, "Input",ExpressionUUID->"10ca8de7-9397-4134-a285-845bae7f47be"]
+}
+]
+*)
+
