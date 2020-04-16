@@ -69,8 +69,10 @@ genPlot <- function(A,eps,ntimes,ax=TRUE,toplab=''){
   }
 }
 
+def_sett <- par()
+
 # Figure 1
-par(mai =rep(.5,4))
+par(mai = rep(.5,4))
 J3 <- genJ(3)
 genPlot(J3,.1,2000)
 
@@ -86,4 +88,3 @@ genPlot(J4,.1,1000,FALSE,"J4")
 genPlot(J5,.1,1000,FALSE,"J5")
 genPlot(J6,.1,1000,FALSE,"J6")
 genPlot(J7,.1,1000,FALSE,"J7")
-
